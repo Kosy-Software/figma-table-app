@@ -7,7 +7,7 @@ import { isValidFigmaUrl } from './lib/validation';
 import { ClientInfo } from '@kosy/kosy-app-api/types';
 import { KosyApi } from '@kosy/kosy-app-api';
 
-module Kosy.Integration.Youtube {
+module Kosy.Integration.Figma {
     export class App {
         private state: AppState = { figmaUrl: null };
         private initializer: ClientInfo;
