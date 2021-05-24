@@ -13,10 +13,11 @@ module Kosy.Integration.Figma {
         private initializer: ClientInfo;
         private currentClient: ClientInfo;
 
-        private kosyApi = new KosyApi<AppState, AppMessage>({
+        private kosyApi = new KosyApi<AppState, AppMessage, AppMessage>({
             onClientHasJoined: (client) => this.onClientHasJoined(client),
             onClientHasLeft: (clientUuid) => this.onClientHasLeft(clientUuid),
-            onReceiveMessage: (message) => this.processMessage(message),
+            onReceiveMessageAsClient: (message) => this.processMessageAsClient(message),
+            onReceiveMessageAsHost: (message) => message,
             onRequestState: () => this.getState(),
             onProvideState: (newState: AppState) => this.setState(newState)
         })
@@ -52,7 +53,7 @@ module Kosy.Integration.Figma {
             }
         }
 
-        public processMessage(message: AppMessage) {
+        public processMessageAsClient(message: AppMessage) {
             switch (message.type) {
                 case "receive-figma-url":
                     if (isValidFigmaUrl(message.payload)) {
