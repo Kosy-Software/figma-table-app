@@ -14,7 +14,6 @@ module Kosy.Integration.Figma {
         private currentClient: ClientInfo;
 
         private kosyApi = new KosyApi<AppState, AppMessage, AppMessage>({
-            onClientHasJoined: (client) => this.onClientHasJoined(client),
             onClientHasLeft: (clientUuid) => this.onClientHasLeft(clientUuid),
             onReceiveMessageAsClient: (message) => this.processMessageAsClient(message),
             onReceiveMessageAsHost: (message) => message,
@@ -41,10 +40,6 @@ module Kosy.Integration.Figma {
 
         public getState() {
             return this.state;
-        }
-
-        public onClientHasJoined(client: ClientInfo) {
-            //No need to process this message for this app
         }
 
         public onClientHasLeft(clientUuid: string) {
